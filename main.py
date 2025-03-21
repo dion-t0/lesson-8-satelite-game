@@ -26,9 +26,11 @@ def create_satelite():
         y=random.randint(0,550)
         satelite.pos=x,y
         satelites.append(satelite)
+    start_time = time()
 
 def draw():
     global total_time
+    screen.clear()
     screen.blit("background", (0,0))
     number=1
     for satelite in satelites:
@@ -46,9 +48,26 @@ def draw():
     if next_satelite == 8:
         screen.draw.text("game is finished! good job",(300,300),fontsize=50)
 
+
+def on_mouse_down(pos):
+    print("you are in space")
+    global next_satelite, lines
+    if next_satelite < number_of_satelite:
+        if satelites[next_satelite].collidepoint(pos):
+            if next_satelite:
+                lines.append((satelites[next_satelite-1].pos, satelites[next_satelite].pos))
+            next_satelite = next_satelite + 1
+        else:
+            lines = []
+            next_satelite = 0
+
+
+
+
 #update function repeat it self 
 def update():
     pass
+
 
 
 
